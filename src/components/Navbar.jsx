@@ -2,14 +2,11 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 const Navbar = () => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState('/');
 
-  const handleMouseEnter = () => {
-    setDropdownOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setDropdownOpen(false);
+  // Function to handle click event and set the active link
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
   };
 
   return (
@@ -67,113 +64,52 @@ const Navbar = () => {
               <div className="flex space-x-4">
                 <Link
                   to="/"
-                  className="rounded-md px-3 py-2 text-sm font-medium hover:bg-primary hover:text-white"
+                  className={`rounded-md px-3 py-2 text-sm font-medium ${activeLink === '/' ? 'bg-primary text-white' : 'hover:bg-primary hover:text-white'}`}
                   aria-current="page"
+                  onClick={() => handleLinkClick('/')}
                 >
                   Beranda
                 </Link>
                 <Link
                   to="/edukasi"
-                  className="rounded-md px-3 py-2 text-sm font-medium hover:bg-primary hover:text-white"
+                  className={`rounded-md px-3 py-2 text-sm font-medium ${activeLink === '/edukasi' ? 'bg-primary text-white' : 'hover:bg-primary hover:text-white'}`}
+                  onClick={() => handleLinkClick('/edukasi')}
                 >
                   Edukasi
                 </Link>
                 <Link
                   to="/forum"
-                  className="rounded-md px-3 py-2 text-sm font-medium hover:bg-primary hover:text-white"
+                  className={`rounded-md px-3 py-2 text-sm font-medium ${activeLink === '/forum' ? 'bg-primary text-white' : 'hover:bg-primary hover:text-white'}`}
+                  onClick={() => handleLinkClick('/forum')}
                 >
                   Forum
                 </Link>
                 <Link
                   to="/about"
-                  className="rounded-md px-3 py-2 text-sm font-medium hover:bg-primary hover:text-white"
+                  className={`rounded-md px-3 py-2 text-sm font-medium ${activeLink === '/about' ? 'bg-primary text-white' : 'hover:bg-primary hover:text-white'}`}
+                  onClick={() => handleLinkClick('/about')}
                 >
                   Tentang Kami
                 </Link>
                 <Link
                   to="/mobileapp"
-                  className="rounded-md px-3 py-2 text-sm font-medium hover:bg-primary hover:text-white"
+                  className={`rounded-md px-3 py-2 text-sm font-medium ${activeLink === '/mobileapp' ? 'bg-primary text-white' : 'hover:bg-primary hover:text-white'}`}
+                  onClick={() => handleLinkClick('/mobileapp')}
                 >
                   Hidrotani App
                 </Link>
               </div>
             </div>
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button
-              type="button"
-              className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+
+          {/* Login Button */}
+          <div className="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <Link
+              to="/login"
+              className="rounded-xl bg-primary px-8 py-2 text-sm font-medium text-white hover:bg-secondary"
             >
-              <span className="absolute -inset-1.5"></span>
-              <span className="sr-only">View notifications</span>
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
-                />
-              </svg>
-            </button>
-
-            <div className="relative ml-3">
-              <button
-                type="button"
-                className="flex rounded-full bg-gray-800 text-sm focus:outline-none"
-                onMouseEnter={handleMouseEnter} // Show dropdown on hover
-                onMouseLeave={handleMouseLeave} // Hide dropdown when mouse leaves
-              >
-                <span className="sr-only">Open user menu</span>
-                <img
-                  className="h-8 w-8 rounded-full"
-                  src="https://i.pinimg.com/originals/bb/29/1e/bb291e9ecae445e0167ae8da1b6fbb63.jpg"
-                  alt=""
-                />
-              </button>
-
-              {isDropdownOpen && ( // Conditional rendering of the dropdown menu
-                <div
-                  className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="user-menu-button"
-                  tabIndex="-1"
-                  onMouseEnter={handleMouseEnter} // Keep dropdown open on hover
-                  onMouseLeave={handleMouseLeave} // Hide dropdown when mouse leaves
-                >
-                  <Link
-                    to="/profile"
-                    className="block px-4 py-2 text-sm text-gray-700"
-                    role="menuitem"
-                    id="user-menu-item-0"
-                  >
-                    Your Profile
-                  </Link>
-                  <Link
-                    to="/settings"
-                    className="block px-4 py-2 text-sm text-gray-700"
-                    role="menuitem"
-                    id="user-menu-item-1"
-                  >
-                    Settings
-                  </Link>
-                  <Link
-                    to="/logout"
-                    className="block px-4 py-2 text-sm text-gray-700"
-                    role="menuitem"
-                    id="user-menu-item-2"
-                  >
-                    Sign out
-                  </Link>
-                </div>
-              )}
-            </div>
+              Login
+            </Link>
           </div>
         </div>
       </div>
