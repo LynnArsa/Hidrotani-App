@@ -10,4 +10,5 @@ const Edukasi = () => {
     );
   };
   
+  
   export default Edukasi;
