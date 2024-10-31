@@ -1,4 +1,4 @@
-const Education = () => {
+const Edukasi = () => {
     return (
       <div className="flex flex-col items-center justify-center h-screen bg-gray-100 text-gray-900">
         <h1 className="text-4xl font-semibold mb-4">Edukasi</h1>
@@ -10,4 +10,4 @@ const Education = () => {
     );
   };
   
-  export default Education;
+  export default Edukasi;
